@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<%= stylesheet_link_tag "admin" %>
+<%= render 'layouts/header' %>
+<body class="g-sidenav-show  bg-gray-100">
+<%= render 'layouts/sidebar' %>
+  <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Form</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">New Product</li>
+          </ol>
+          <h6 class="font-weight-bolder mb-0">New Product</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+          </div>
+          <ul class="navbar-nav  justify-content-end">
+            <li class="nav-item d-flex align-items-center">
+            <%= link_to destroy_user_session_path, method: :delete do %>
+              <span class="text-sm">
+                <i class="fa fa-sign-out me-sm-1"></i>
+                Sign Out
+              </span>
+            <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>Add New product</h6>
+                  <%= form_with(model: product) do |form| %>
+                    <% if product.errors.any? %>
+                      <div style="color: red">
+                        <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+                        <ul>
+                          <% product.errors.each do |error| %>
+                            <li><%= error.full_message %></li>
+                          <% end %>
+                        </ul>
+                      </div>
+                  <% end %>
+                 <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Product Code</label>
+                   <%= form.text_field :code, class:"form-control" %>
+                </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Product Name</label>
+                  <%= form.text_field :product_name, class:"form-control" %>
+                </div>
+                <div>
+                <label for="exampleInputEmail1" class="form-label">Category</label>
+                  <%= form.select(:category_id, Category.all.collect{|category| [category.name, category.id]}, class:"dropdown-menu") %>
+                </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Stock</label>
+                  <%= form.number_field :stock, class:"form-control" %>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Image</label>
+                  <%= form.file_field :images, class:"form-control", multiple: true %>
+                </div>
+                <%= form.submit :class => 'btn btn-success', onclick: "myAlertBottom();" %>
+              <% end %>
+              <div class="foots">
+                <%= link_to "Back to products", products_path %>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+  <!--   Core JS Files   -->
+    <%= javascript_include_tag "popper.min.js" %>
+    <%= javascript_include_tag "bootstrap.min.js" %>
+    <%= javascript_include_tag "perfect-scrollbar.min.js" %>
+    <%= javascript_include_tag "smooth-scrollbar.min.js" %>
+    <%= javascript_include_tag "chartjs.min.js" %>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+
+    function myAlertBottom(){
+      $(".myAlert-bottom").show();
+      setTimeout(function(){
+        $(".myAlert-bottom").hide(); 
+      }, 2000);
+    }
+  </script>
+  <!-- Github buttons -->
+  <%= javascript_include_tag "https://buttons.github.io/buttons.js" %>
+  <%= javascript_include_tag "soft-ui-dashboard.min.js?v=1.0.3" %>
+</body>
+
+</html>

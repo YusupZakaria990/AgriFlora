@@ -1,0 +1,67 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In & Sign Up Form</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <%= stylesheet_link_tag "auth", "data-turbo-track": "reload" %>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/1788c719dd.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="container_auth">
+    <div class="container__forms">
+    
+      <div class="form">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+        <form action="" class="form__sign-in">
+          <h2 class="form__title">Sign Up</h2>
+          <div class="form__input-field">
+            <i class="fas fa-user"></i>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
+          </div>
+          <div class="form__input-field">
+            <i class="fas fa-lock"></i>
+            <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password" %>
+          </div>
+          <div class="form__input-field">
+            <i class="fas fa-lock"></i>
+            <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password Comfirmation" %>
+          </div>
+          <%= f.submit "Register", class:"form__submit", data: {turbo: false} %>
+          <p class="form__social-text">Or Sign in with social platforms</p>
+          <div class="form__social-media">
+            <a href="#" class="form__social-icons">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="form__social-icons">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="form__social-icons">
+              <i class="fab fa-google"></i>
+            </a>
+            <a href="#" class="form__social-icons">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+          <% end %>
+        </form>
+      </div>
+    </div>
+    <div class="container__panels">
+      <div class="panel panel__left">
+        <div class="panel__content">
+          <h3 class="panel__title_auth text-white">Have an Account ?</h3>
+          <p class="panel__paragraph">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Doloremque adipisci tempore aliquid?
+          </p>
+          <%= button_to "Sign In", new_user_session_path, :method => "get", class:"btn_auth btn-transparent" %>
+        </div>
+        <%= image_tag "care3.png", class:"panel__image" %>
+      </div>
+    </div>
+  </div>
+</body>
